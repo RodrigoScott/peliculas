@@ -19,8 +19,8 @@ class CardSwiper extends StatelessWidget {
       //height: 300.0,
       child: Swiper(
         layout: SwiperLayout.STACK,
-        itemWidth: _screenSize.width * 0.8,
-        itemHeight:_screenSize.height * 0.7,
+        itemWidth: _screenSize.width * 0.6,
+        itemHeight:_screenSize.height * 0.5,
         //itemWidth: 200.0,
         itemBuilder: (BuildContext context,int index){
           return ClipRRect(
