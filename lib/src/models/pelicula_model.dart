@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Peliculas {
 
   List<Pelicula> items = new List();
@@ -71,6 +73,15 @@ class Pelicula {
 
 
   }
+
+  getPosterImg(){
+    if (posterPath == null){
+      return 'https://rimage.gnst.jp/livejapan.com/public/img/common/noimage.jpg?20190630050058';
+    }
+    else {
+      return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
+  } //getPosterImg
 
 
 }
