@@ -62,6 +62,8 @@ class HomePage extends StatelessWidget {
 
  Widget _footer(BuildContext context) {
 
+    peliculasProvider.getPopular();
+
     return Container(
       width: double.infinity,
       child: Column(
@@ -73,12 +75,12 @@ class HomePage extends StatelessWidget {
               child: Text('Populares', style: TextStyle(color: Colors.white))
           ),
           SizedBox(height: 10.0),
-          FutureBuilder(
-              future: peliculasProvider.getPopular(),
+          StreamBuilder(
+              stream: peliculasProvider.popularStream,
               builder: (BuildContext context, AsyncSnapshot<List> snapshot){
                 //snapshot.data?.forEach((movie) => print(movie.title));
                 if (snapshot.hasData){
-                  return MovieHorizontal(movie: snapshot.data);
+                  return MovieHorizontal(movie: snapshot.data, nextPage: peliculasProvider.getPopular);
                 }
                 else{
                   CircularProgressIndicator();
