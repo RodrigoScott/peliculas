@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:peliculas/src/models/pelicula_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
@@ -13,9 +14,14 @@ class MovieHorizontal extends StatelessWidget {
     final _screenSize = MediaQuery.of(context).size;
 
     return Container(
-      height: _screenSize.height * 0.2,
+      height: _screenSize.height * 0.27,
       child: PageView(
-        children: _cards(),
+        pageSnapping: false,
+        controller: PageController(
+          initialPage: 1,
+          viewportFraction: 0.3,
+        ),
+        children: _cards(context),
       ),
 
 
@@ -23,7 +29,7 @@ class MovieHorizontal extends StatelessWidget {
     );
   }
 
-List<Widget>_cards() {
+List<Widget>_cards(BuildContext context) {
 
     return movie.map((pelicula){
 
@@ -31,12 +37,21 @@ List<Widget>_cards() {
         margin: EdgeInsets.only(right: 15.0),
         child: Column(
           children: <Widget>[
-            FadeInImage(
-                placeholder: AssetImage('asset/img/no-image.jpg'),
-                image: NetworkImage(pelicula.getPosterImg()),
-              fit: BoxFit.cover,
-              height: 160.0,
-            )
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                  placeholder: AssetImage('asset/img/no-image.jpg'),
+                  image: NetworkImage(pelicula.getPosterImg()),
+                fit: BoxFit.cover,
+                height: 130.0,
+              ),
+            ),
+            SizedBox(height: 6.0),
+            Text(
+              pelicula.title,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: Colors.white), textScaleFactor: 0.7,
+            ),
           ],
         ),
 
