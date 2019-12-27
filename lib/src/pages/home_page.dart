@@ -6,7 +6,7 @@ import 'package:peliculas/src/widget/movie_horizontal.dart';
 
 class HomePage extends StatelessWidget {
 
-  final peliculasProvider = new PeliculasProvider();
+  final peliculasProvider = new MoviesProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
 
 
     return FutureBuilder(
-        future: peliculasProvider.getEnCines(),
+        future: peliculasProvider.getCinema(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot){
           if (snapshot.hasData) {
             return CardSwiper(peliculas: snapshot.data);

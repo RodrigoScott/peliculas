@@ -4,7 +4,7 @@ import 'package:peliculas/src/models/pelicula_model.dart';
 
 class CardSwiper extends StatelessWidget {
 
-  final List<Pelicula> peliculas;
+  final List<Movie> peliculas;
 
   CardSwiper({ @required this.peliculas});
 

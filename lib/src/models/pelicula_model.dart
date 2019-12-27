@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 
-class Peliculas {
+class Movies {
 
-  List<Pelicula> items = new List();
+  List<Movie> items = new List();
 
-  Peliculas();
+  Movies();
 
-  Peliculas.fromJsonList( List<dynamic> jsonList  ) {
+  Movies.fromJsonList( List<dynamic> jsonList  ) {
 
     if ( jsonList == null ) return;
 
     for ( var item in jsonList  ) {
-      final pelicula = new Pelicula.fromJsonMap(item);
+      final pelicula = new Movie.fromJsonMap(item);
       items.add( pelicula );
     }
 
@@ -21,7 +21,7 @@ class Peliculas {
 
 
 
-class Pelicula {
+class Movie {
   int voteCount;
   int id;
   bool video;
@@ -37,7 +37,7 @@ class Pelicula {
   String overview;
   String releaseDate;
 
-  Pelicula({
+  Movie({
     this.voteCount,
     this.id,
     this.video,
@@ -54,7 +54,7 @@ class Pelicula {
     this.releaseDate,
   });
 
-  Pelicula.fromJsonMap( Map<String, dynamic> json ) {
+  Movie.fromJsonMap( Map<String, dynamic> json ) {
 
     voteCount        = json['vote_count'];
     id               = json['id'];
