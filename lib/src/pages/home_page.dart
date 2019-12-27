@@ -11,9 +11,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black12,
       appBar: AppBar(
         title: Text('Peliculas en cines'),
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.search),
@@ -22,7 +23,9 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: SafeArea( //para respetar el notch de los celulares mas nuevos
+      body:
+
+      SafeArea( //para respetar el notch de los celulares mas nuevos
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -60,9 +63,16 @@ class HomePage extends StatelessWidget {
  Widget _footer(BuildContext context) {
 
     return Container(
+      width: double.infinity,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Populares', style: Theme.of(context).textTheme.subhead,),
+          Divider(),
+          Container(
+              padding: EdgeInsets.only(left: 20),
+              child: Text('Populares', style: TextStyle(color: Colors.white))
+          ),
+          SizedBox(height: 10.0),
           FutureBuilder(
               future: peliculasProvider.getPopular(),
               builder: (BuildContext context, AsyncSnapshot<List> snapshot){
@@ -80,7 +90,7 @@ class HomePage extends StatelessWidget {
 
         ],
       ),
-      width: double.infinity,
+
     );
 
  }
