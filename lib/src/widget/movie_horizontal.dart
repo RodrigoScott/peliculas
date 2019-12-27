@@ -4,7 +4,7 @@ import 'package:peliculas/src/models/pelicula_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
 
-  final List<Pelicula> movie;
+  final List<Movie> movie;
 
   MovieHorizontal({@required this.movie});
 
