@@ -83,9 +83,9 @@ class HomePage extends StatelessWidget {
                   return MovieHorizontal(movie: snapshot.data, nextPage: peliculasProvider.getPopular);
                 }
                 else{
-                  CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 }
-                return Container();
+                //return Container();
               },
 
           )

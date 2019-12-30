@@ -6,15 +6,18 @@ import 'package:http/http.dart' as http;
 
 class MoviesProvider {
 
-  String _apikey = '509c6612a941d717cb26b72abc98b382';
-  String _url = 'api.themoviedb.org';
-  String _language = 'es-ES';
+  String _apikey    = '509c6612a941d717cb26b72abc98b382';
+  String _url       = 'api.themoviedb.org';
+  String _language  = 'es-ES';
 
-  int _popularPage = 0;
+  int _popularPage  = 0;
+
+  bool _loading     = false;
 
   //create stream variables
   List<Movie> _populars = new List();
-  final _popularStremController = StreamController<List<Movie>>.broadcast();
+
+  final _popularStremController = StreamController<List<Movie>>.broadcast(); //el broadcast es para que lo escuchen varios widgets
 
   Function(List<Movie>)get popularSink => _popularStremController.sink.add; //insert data
 
@@ -42,7 +45,7 @@ Future<List<Movie>>  getCinema() async{
 
   final url = Uri.https(_url, '3/movie/now_playing', {
 
-    'api_key' : _apikey,
+    'api_key'  : _apikey,
     'language' : _language,
 
   });
@@ -53,6 +56,10 @@ Future<List<Movie>>  getCinema() async{
 
 
   Future<List<Movie>>  getPopular() async{
+
+    if (_loading) return[];
+
+    _loading = true;
 
    _popularPage++;
 
@@ -68,6 +75,8 @@ Future<List<Movie>>  getCinema() async{
 
     _populars.addAll(resp);
     popularSink(_populars);
+
+    _loading = false;
 
     return resp;
 
