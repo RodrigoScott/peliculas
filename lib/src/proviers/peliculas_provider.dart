@@ -30,7 +30,7 @@ class MoviesProvider {
 
 
 
- Future<List<Movie>> _ResponseProcess(Uri  url) async {
+ Future<List<Movie>> _responseProcess(Uri  url) async {
 
    final resp = await http.get( url );
    final decodedData = json.decode(resp.body);
@@ -50,7 +50,7 @@ Future<List<Movie>>  getCinema() async{
 
   });
 
-  return await _ResponseProcess(url);
+  return await _responseProcess(url);
 
   }
 
@@ -71,7 +71,7 @@ Future<List<Movie>>  getCinema() async{
 
     });
 
-    final resp = await _ResponseProcess(url);
+    final resp = await _responseProcess(url);
 
     _populars.addAll(resp);
     popularSink(_populars);

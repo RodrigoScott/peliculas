@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 
 class Movies {
 
@@ -83,6 +82,14 @@ class Movie {
     }
   } //getPosterImg
 
+  getBackgroundImg(){
+    if (posterPath == null){
+      return 'https://rimage.gnst.jp/livejapan.com/public/img/common/noimage.jpg?20190630050058';
+    }
+    else {
+      return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+    }
+  }
 
 }
 
