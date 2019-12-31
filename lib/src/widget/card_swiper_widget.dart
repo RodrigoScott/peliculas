@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:peliculas/src/models/pelicula_model.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
 
 class CardSwiper extends StatelessWidget {
 
@@ -27,6 +28,7 @@ class CardSwiper extends StatelessWidget {
           peliculas[index].uniqueId = '${peliculas[index].id}-card';
 
           return Hero(
+
             tag: peliculas[index].uniqueId,
             child: ClipRRect(
 
