@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas/src/proviers/peliculas_provider.dart';
+import 'package:peliculas/src/search/search_delegate.dart';
 import 'package:peliculas/src/widget/card_swiper_widget.dart';
 import 'package:peliculas/src/widget/movie_horizontal.dart';
 
@@ -11,14 +12,20 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text('Peliculas en cines'),
         backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.search),
-              onPressed: (){}
+              onPressed: (){
+                showSearch(
+                    context: context,
+                    delegate: DataSearch(),
+                    //query: 'Hola', //busqueda precargada
+                );
+              },
 
           )
         ],
@@ -27,7 +34,7 @@ class HomePage extends StatelessWidget {
 
       SafeArea( //para respetar el notch de los celulares mas nuevos
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               _swiperTarjetas(),
               _footer(context),

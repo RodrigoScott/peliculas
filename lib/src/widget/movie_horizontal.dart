@@ -26,7 +26,7 @@ class MovieHorizontal extends StatelessWidget {
     });
 
     return Container(
-      height: _screenSize.height * 0.27,
+      height: _screenSize.height * 0.26,
       child: PageView.builder(
         pageSnapping: false, //para que no regrese el carrusel sino que tome el flujo de movimiento
         controller: _pageController,
