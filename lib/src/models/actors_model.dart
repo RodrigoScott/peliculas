@@ -17,7 +17,7 @@ class Cast {
 }
 
 class Actor {
-  String castId;
+  int castId;
   String character;
   String creditId;
   int gender;

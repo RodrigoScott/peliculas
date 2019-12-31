@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:peliculas/src/models/actors_model.dart';
 import 'package:peliculas/src/models/pelicula_model.dart';
+import 'package:peliculas/src/proviers/peliculas_provider.dart';
 
 class MovieDetail extends StatelessWidget {
 
@@ -20,7 +23,8 @@ class MovieDetail extends StatelessWidget {
                   SizedBox(height: 20.0),
                   _titlePoster(movie),
                   _description(movie),
-                  
+                  _createCasting(movie),
+
 
                 ]
 
@@ -69,9 +73,12 @@ Widget  _titlePoster(Movie movie) {
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
         children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Image(image: NetworkImage(movie.getPosterImg()), height: 150.0,
+          Hero(
+            tag: movie.uniqueId,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Image(image: NetworkImage(movie.getPosterImg()), height: 150.0,
+              ),
             ),
           ),
           SizedBox(width: 15.0),
@@ -100,7 +107,7 @@ Widget  _titlePoster(Movie movie) {
 
 }
 
-Widget  _description(Movie movie) {
+ Widget  _description(Movie movie) {
     
     return Container(
       padding: EdgeInsets.all(20.0),
@@ -108,5 +115,65 @@ Widget  _description(Movie movie) {
       child: Text(movie.overview, style: TextStyle(color: Colors.white, fontSize: 15.0, ), textAlign: TextAlign.justify,),
 
     );
-}
+ }
+
+ Widget _createCasting(Movie movie) {
+
+    final movieProvider = new MoviesProvider();
+
+    return FutureBuilder(
+      future: movieProvider.getCast(movie.id.toString()),
+      builder: (context, AsyncSnapshot<List> snapshot) {
+          if (snapshot.hasData) {
+            return _createActorPageVIew(snapshot.data);
+          }
+          else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+   );
+
+  }
+
+  Widget _createActorPageVIew(List<Actor> actors) {
+
+    return SizedBox(
+      height: 200.0,
+      child: PageView.builder(
+        pageSnapping: false,
+        controller: PageController(
+          viewportFraction: 0.3,
+          initialPage: 1,
+        ),
+        itemCount: actors.length,
+        itemBuilder: (context, i) => _actorCard(actors[i]),
+
+      ),
+    );
+
+  }
+
+ Widget _actorCard(Actor actor) {
+
+    return Container(
+      child: Column(
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: FadeInImage(
+                placeholder: NetworkImage('https://www.mameau.com/game-history-notes/wiznliz/media/developers/no-avatar.jpg'),
+                image: NetworkImage(actor.getPhoto()),
+              height: 150.0,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Text(actor.name, style: TextStyle(color: Colors.white), overflow: TextOverflow.ellipsis,)
+        ],
+      ),
+      margin: EdgeInsets.symmetric(horizontal: 5.0),
+    );
+
+ }
+
+
 }
