@@ -23,7 +23,6 @@ class HomePage extends StatelessWidget {
                 showSearch(
                     context: context,
                     delegate: DataSearch(),
-                    //query: 'Hola', //busqueda precargada
                 );
               },
 
@@ -32,7 +31,7 @@ class HomePage extends StatelessWidget {
       ),
       body:
 
-      SafeArea( //para respetar el notch de los celulares mas nuevos
+      SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -85,7 +84,6 @@ class HomePage extends StatelessWidget {
           StreamBuilder(
               stream: peliculasProvider.popularStream,
               builder: (BuildContext context, AsyncSnapshot<List> snapshot){
-                //snapshot.data?.forEach((movie) => print(movie.title));
                 if (snapshot.hasData){
                   return MovieHorizontal(movie: snapshot.data, nextPage: peliculasProvider.getPopular);
                 }

@@ -18,11 +18,11 @@ class MoviesProvider {
   //create stream variables
   List<Movie> _populars = new List();
 
-  final _popularStremController = StreamController<List<Movie>>.broadcast(); //el broadcast es para que lo escuchen varios widgets
+  final _popularStremController = StreamController<List<Movie>>.broadcast();
 
-  Function(List<Movie>)get popularSink => _popularStremController.sink.add; //insert data
+  Function(List<Movie>)get popularSink => _popularStremController.sink.add;
 
-  Stream<List<Movie>> get popularStream => _popularStremController.stream;// listen data
+  Stream<List<Movie>> get popularStream => _popularStremController.stream;
 
   void disposeStreams(){
     _popularStremController?.close();

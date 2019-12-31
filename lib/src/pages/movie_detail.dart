@@ -15,7 +15,7 @@ class MovieDetail extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       body: CustomScrollView(
-        slivers: <Widget>[//esto es parecido al child
+        slivers: <Widget>[
           _createAppBar(movie),
           SliverList(
               delegate: SliverChildListDelegate(

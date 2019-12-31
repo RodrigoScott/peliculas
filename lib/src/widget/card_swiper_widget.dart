@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:peliculas/src/models/pelicula_model.dart';
-import 'package:flutter/scheduler.dart' show timeDilation;
 
 class CardSwiper extends StatelessWidget {
 
@@ -16,13 +15,10 @@ class CardSwiper extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.only(top: 10.0),
-      //width: double.infinity,
-      //height: 300.0,
       child: Swiper(
         layout: SwiperLayout.STACK,
         itemWidth: _screenSize.width * 0.7,
         itemHeight:_screenSize.height * 0.5,
-        //itemWidth: 200.0,
         itemBuilder: (BuildContext context,int index){
 
           peliculas[index].uniqueId = '${peliculas[index].id}-card';
@@ -47,8 +43,6 @@ class CardSwiper extends StatelessWidget {
 
         },
         itemCount: peliculas.length,
-        //pagination: new SwiperPagination(),
-        //control: new SwiperControl(),
 
       ),
     );

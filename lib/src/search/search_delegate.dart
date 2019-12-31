@@ -18,13 +18,12 @@ class DataSearch extends SearchDelegate {
     );
   }
 
-  String select = '';
+  List<Movie> select = [];
   final movieProvider = new MoviesProvider();
 
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    // Las acciones de nuestro appBar dentro de la caja de busqueda
     return [
       IconButton(
 
@@ -37,7 +36,6 @@ class DataSearch extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
-    // Icono a la izquierda del appBar
     return IconButton(
         icon: AnimatedIcon(
             icon: AnimatedIcons.menu_arrow,
@@ -53,7 +51,34 @@ class DataSearch extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Container();
+
+    if(select.isEmpty){
+
+      return Center(child: CircularProgressIndicator());
+
+          } else {
+      return
+        Container(
+          child: ListView(
+              children: select.map((movie){
+                return ListTile(
+
+                  leading: FadeInImage(
+                    placeholder: AssetImage('asset/img/no-image.jpg'),
+                    image: NetworkImage(movie.getPosterImg()),
+                    height: 250.0,
+                    fit: BoxFit.cover,
+                  ),
+                  title: Text(movie.title, style: TextStyle(color: Colors.white, fontSize: 13.0, ), overflow: TextOverflow.ellipsis),
+                  subtitle: Text(movie.originalTitle, style: TextStyle(color: Colors.white, fontSize: 10.0, ), overflow: TextOverflow.ellipsis),
+
+                );
+              }).toList()
+          ),
+        );
+          }
+
+
   }
 
   @override
@@ -83,7 +108,8 @@ class DataSearch extends SearchDelegate {
                   title: Text(movie.title, style: TextStyle(color: Colors.white, fontSize: 13.0, ), overflow: TextOverflow.ellipsis),
                   subtitle: Text(movie.originalTitle, style: TextStyle(color: Colors.white, fontSize: 10.0, ), overflow: TextOverflow.ellipsis),
                   onTap: (){
-                    close(context, null);
+                    select = movies;
+                    //close(context, null);
                     movie.uniqueId = '${movie.uniqueId}-search';
                     Navigator.pushNamed(context, 'detail', arguments: movie);
                   },
@@ -97,41 +123,5 @@ class DataSearch extends SearchDelegate {
     );
 
   }
-
-  /*@override
-  Widget buildResults(BuildContext context) {
-    // Crea los resultados que vamos a mostrar
-    return Center(
-      child: Container(
-        height: 100.0,
-        width: 100.0,
-        color: Colors.grey,
-        child: Text(select),
-      ),
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // Sugerencias de resultados de la busqueda dependiendo de la escritura
-
-    final suggestedList = (query.isEmpty) ? recentMovies : movies.where((p) => p.toLowerCase().startsWith(query.toLowerCase())).toList();
-
-    return ListView.builder(
-      itemCount: suggestedList.length,
-      itemBuilder: (context,i){
-        return ListTile(
-          leading: Icon(Icons.movie),
-          title: Text(suggestedList[i]),
-          onTap: (){
-            select = suggestedList[i];
-            showResults(context);
-          },
-        );
-      },
-    );
-  }*/
-
-
 
 }

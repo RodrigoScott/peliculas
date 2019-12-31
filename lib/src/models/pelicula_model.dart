@@ -22,7 +22,7 @@ class Movies {
 
 class Movie {
 
-  String uniqueId; //variable que inventamos para el hero
+  String uniqueId;
 
   int voteCount;
   int id;
